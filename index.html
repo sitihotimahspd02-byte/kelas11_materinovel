@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bedah Novel: MPI Interaktif</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=Newsreader:ital,wght@1,400&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+:root{--bg:#f1f3fd;--panel:#fff;--ink:#1d2243;--mute:#566086;--line:#d0d6ee;--accent:#3b4cca;--amber:#f2a900;--ok:#1b7a43;--bad:#b4381c;--tint:#e4e8fa;--on:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12162b;--panel:#1b2140;--ink:#e8ebf9;--mute:#a6aecf;--line:#363e69;--ok:#5fd18a;--bad:#ff8a6b;--tint:#262e57}}
+:root[data-theme="dark"]{--bg:#12162b;--panel:#1b2140;--ink:#e8ebf9;--mute:#a6aecf;--line:#363e69;--ok:#5fd18a;--bad:#ff8a6b;--tint:#262e57}
+body[data-v=Teori]{--accent:#1f6fd1}body[data-v=Bermain]{--accent:#c2306f}body[data-v=Berlatih]{--accent:#b85a00}body[data-v=Simulasi]{--accent:#0b7f84}body[data-v=Refleksi]{--accent:#6a3fc9}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 "Atkinson Hyperlegible",system-ui,sans-serif}
+.wrap{max-width:800px;margin:0 auto;padding:14px 14px 56px}
+header h1{font:800 clamp(24px,5.5vw,34px)/1.1 "Bricolage Grotesque","Atkinson Hyperlegible",sans-serif;margin:2px 0}
+header p{margin:0 0 8px;color:var(--mute)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;padding-bottom:8px}
+.pgw{height:6px;background:var(--tint);border-radius:3px;margin-bottom:8px;overflow:hidden}#pg{height:100%;width:0;background:linear-gradient(90deg,#3b4cca,#c2306f,#f2a900);transition:width .4s}
+nav{display:flex;gap:6px;overflow-x:auto}
+nav button{flex:none;display:flex;align-items:center;gap:6px;border:2px solid var(--line);background:var(--panel);color:var(--ink);padding:7px 13px;border-radius:14px;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
+nav button[aria-current=page]{background:var(--accent);border-color:var(--accent);color:var(--on)}
+nav button.done::after{content:"\2713";color:var(--ok);font-weight:800}nav button[aria-current=page]::after{content:""}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.card{background:var(--panel);border:2px solid var(--line);border-top:8px solid var(--accent);border-radius:16px;padding:18px}
+h2{font:800 27px/1.15 "Bricolage Grotesque","Atkinson Hyperlegible",sans-serif;margin:0 0 8px}
+h3{font:800 20px/1.25 "Bricolage Grotesque","Atkinson Hyperlegible",sans-serif;margin:18px 0 8px}
+p{margin:0 0 10px}.mute{color:var(--mute)}
+.hero{display:flex;gap:16px;align-items:center;background:linear-gradient(135deg,var(--accent),#1d2243);color:#fff;border-radius:14px;padding:18px;margin-bottom:14px}.hero h2{color:#fff}.hero p{margin:0}.big{font-size:60px;line-height:1}
+.quote{border-left:6px solid var(--amber);padding:10px 14px;font:italic 400 clamp(18px,3.4vw,21px)/1.6 Newsreader,Georgia,serif;margin:10px 0;background:var(--bg);border-radius:0 10px 10px 0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px;margin:10px 0}
+.cd{background:var(--panel);border:2px solid var(--line);border-top:6px solid var(--c,var(--accent));border-radius:12px;padding:12px}
+.cd b{display:block;font-size:17px}.cd p{margin:4px 0;font-size:15px}.cd .eg{background:color-mix(in srgb,var(--c,var(--accent)) 14%,var(--panel));border-radius:8px;padding:6px 9px;font-size:14px}
+.ei{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:color-mix(in srgb,var(--c,var(--accent)) 18%,var(--panel));margin-bottom:6px}
+.chipbtn{text-align:left;cursor:pointer;font:inherit;color:inherit}.chipbtn:hover{border-color:var(--c)}
+.steps{margin:10px 0;padding:0;list-style:none}.steps li{display:flex;gap:12px;position:relative;padding-bottom:14px}
+.steps li::before{content:"";position:absolute;left:19px;top:40px;bottom:0;width:3px;background:var(--line)}.steps li:last-child::before{display:none}
+.steps .n{flex:none;width:40px;height:40px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-weight:800}
+.steps .tx{background:var(--panel);border:2px solid var(--line);border-radius:12px;padding:8px 12px;flex:1}.steps b{display:block}.steps p{margin:2px 0;font-size:15px}
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}.vs div{border-radius:12px;padding:10px 12px;font-size:15px}
+.tip{background:color-mix(in srgb,var(--amber) 22%,var(--panel));border:2px dashed var(--amber);border-radius:12px;padding:10px 14px;margin:10px 0}
+details{border:2px solid var(--line);border-radius:14px;margin:10px 0;background:var(--bg)}
+summary{padding:12px 14px;cursor:pointer;font-weight:800;font-size:18px}details>div{padding:0 14px 12px}
+.opts{display:grid;gap:8px;margin:12px 0}.opts.cols{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
+.opt{text-align:left;background:var(--panel);color:var(--ink);border:2px solid var(--line);border-radius:12px;padding:12px 14px;font:inherit;cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--accent);transform:translateY(-1px)}.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 14%,var(--panel))}.opt.no{border-color:var(--bad)}
+.fb{min-height:3em}.fb.ok{color:var(--ok)}.fb.no{color:var(--bad)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{background:var(--accent);color:var(--on);border:0;border-radius:12px;padding:11px 20px;font:800 16px "Atkinson Hyperlegible",sans-serif;cursor:pointer}
+.btn[disabled]{opacity:.45;cursor:not-allowed}.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line)}
+input[type=range]{width:100%;accent-color:var(--accent);height:34px}.ends{display:flex;justify-content:space-between;color:var(--mute);font-size:15px}
+.meters{display:grid;gap:10px;margin:14px 0;padding:12px 14px;border:2px solid var(--line);border-radius:12px;background:var(--bg)}
+.m{display:grid;grid-template-columns:170px 1fr;gap:10px;align-items:center;font-size:15px}
+.bar{height:14px;background:var(--tint);border-radius:7px;overflow:hidden}.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .35s;border-radius:7px}
+.arc{display:flex;align-items:flex-end;gap:6px;height:140px;margin:10px 0}
+.arc button{flex:1;border:2px solid var(--line);border-bottom:0;background:var(--tint);color:var(--ink);border-radius:10px 10px 0 0;font:inherit;font-size:13px;font-weight:700;cursor:pointer;padding:4px 2px}
+.arc button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--on)}
+textarea{width:100%;min-height:80px;font:inherit;padding:10px;border:2px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink)}
+.done{border:2px solid var(--ok);border-radius:12px;padding:14px;margin-top:12px;background:color-mix(in srgb,var(--ok) 10%,var(--panel))}
+label.ck{display:flex;gap:10px;align-items:flex-start;margin:6px 0}label.ck input{margin-top:6px;width:20px;height:20px;accent-color:var(--accent)}
+@media(max-width:560px){.m,.vs{grid-template-columns:1fr}.hero{flex-direction:column;text-align:center}.arc button{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.bar i,#pg,.opt{transition:none}}
+.react{display:flex;gap:12px;align-items:center;border-radius:12px;padding:10px 14px;border:2px solid;margin-top:10px}
+.react.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 12%,var(--panel))}.react.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 10%,var(--panel))}
+.react .em{font-size:38px;line-height:1}.react p{margin:2px 0 0;font-size:15px}
+.gain{background:var(--amber);color:#2b1d00;border-radius:8px;padding:1px 8px;font-weight:800;font-size:14px;white-space:nowrap}
+.pts{font-weight:800}.rv{border:2px solid var(--line);border-left-width:8px;border-radius:12px;padding:10px 14px;margin:10px 0;background:var(--panel)}
+.rv.ok{border-left-color:var(--ok)}.rv.no{border-left-color:var(--bad)}.rv p{margin:4px 0;font-size:15px}
+.score{font:800 44px/1 "Bricolage Grotesque",sans-serif}
+</style>
+</head>
+<body>
+<main class="wrap">
+<div class="top"><header><h1>📖 Bedah Novel</h1><p>Pengertian, struktur, dan unsur novel · Kelas XI</p></header><div class="pgw"><div id="pg"></div></div><nav id="nav" aria-label="Menu"></nav></div>
+<section id="view" class="card" tabindex="-1"></section>
+</main>
+<script>
+const $=(s,e=document)=>e.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const V=['Pengantar','Teori','Bermain','Berlatih','Simulasi','Refleksi'];
+const P={Bermain:null,Berlatih:null},seen=new Set();
+const IC={Pengantar:'🏠',Teori:'📚',Bermain:'🎮',Berlatih:'✏️',Simulasi:'🧪',Refleksi:'💭'};
+function go(v){seen.add(v);document.body.dataset.v=v;
+ $('#nav').innerHTML=V.map(x=>`<button ${x===v?'aria-current="page"':''} class="${seen.has(x)&&x!==v?'done':''}" data-v="${x}"><span aria-hidden="true">${IC[x]}</span>${x}</button>`).join('');
+ $('#pg').style.width=(seen.size/V.length*100)+'%';
+ document.querySelectorAll('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.v));R[v]();window.scrollTo(0,0)}
+const R={};
+const NV="<i>Hujan di Kampung Kenanga</i>";
+
+const cd=(c,e,t,d,x)=>`<div class="cd" style="--c:${c}"><div class="ei" aria-hidden="true">${e}</div><b>${t}</b><p>${d}</p>${x?`<p class="eg">${x}</p>`:''}</div>`;
+R.Pengantar=()=>{$('#view').innerHTML=`<div class="hero"><div class="big" aria-hidden="true">📖</div><div><h2>Jadilah detektif novel!</h2><p>Kamu akan belajar membongkar sebuah novel: apa itu novel, bagaimana ceritanya disusun, dan apa saja yang membentuknya.</p></div></div>
+<h3>Novel contoh kita</h3><p>Semua contoh memakai novel rekaan ${NV}: kisah Nadira, anak nelayan tahun 1994 yang ingin kuliah meski ayahnya menolak.</p>
+<div class="quote">Nadira menggenggam surat pengumuman beasiswa itu seperti menggenggam tali perahu: erat, takut terlepas.</div>
+<h3>Peta belajarmu</h3><div class="cards">${[['#1f6fd1','📚','Teori','Pahami konsep dengan kartu dan bagan.','Teori'],['#c2306f','🎮','Bermain','Sortir unsur dari kutipan novel.','Bermain'],['#b85a00','✏️','Berlatih','Kerjakan soal dan baca pembahasan.','Berlatih'],['#0b7f84','🧪','Simulasi','Ubah sudut pandang, lihat grafik alur.','Simulasi'],['#6a3fc9','💭','Refleksi','Nilai dirimu dan buat ringkasan.','Refleksi']].map(a=>`<button class="cd chipbtn" style="--c:${a[0]}" onclick="go('${a[4]}')"><div class="ei" aria-hidden="true">${a[1]}</div><b>${a[2]}</b><p>${a[3]}</p></button>`).join('')}</div>
+<h3>Tujuanmu</h3><p>✅ Menjelaskan pengertian dan ciri novel<br>✅ Mengidentifikasi struktur novel<br>✅ Menganalisis unsur intrinsik dan ekstrinsik beserta buktinya</p>
+<div class="row"><span></span><button class="btn" onclick="go('Teori')">Mulai belajar</button></div>`};
+
+const T=[
+["📘 Apa itu novel dan apa cirinya?",()=>`<p><b>Novel</b> adalah karya prosa fiksi yang panjang, menceritakan kehidupan tokoh dan konfliknya secara mendalam.</p><div class="tip">💡 <b>Analogi:</b> cerpen seperti video pendek, novel seperti serial. Episodenya lebih banyak, tokohnya lebih banyak, kejutannya pun lebih banyak.</div>
+<div class="cards">${cd('#3b4cca','📝','Fiksi berbentuk prosa','Tokoh dan peristiwa rekaan, ditulis dalam narasi dan dialog.','Nadira dan Kampung Kenanga adalah rekaan.')}${cd('#1f6fd1','📏','Cerita panjang','Biasanya ratusan halaman.','Mengikuti Nadira dari remaja hingga dewasa.')}${cd('#c2306f','👥','Tokoh banyak, watak berkembang','Tokoh bisa berubah seiring cerita.','Nadira berubah dari pemberontak menjadi pendidik.')}${cd('#b85a00','⚔️','Konflik berlapis','Lebih dari satu masalah saling berkait.','Melawan ayah, keadaan ekonomi, dan keraguan sendiri.')}${cd('#0b7f84','🗺️','Latar luas','Tempat dan waktu beragam.','Kampung nelayan, sekolah, kota kampus.')}</div>
+<p class="mute">Contoh novel Indonesia: <i>Bumi Manusia</i> (Pramoedya Ananta Toer) dan <i>Laskar Pelangi</i> (Andrea Hirata).</p>`],
+["🧭 Struktur: dari awal sampai akhir",()=>`<p>Struktur adalah urutan tahap cerita. Ikuti garis dari atas ke bawah.</p><ol class="steps">${[['#3b4cca','Orientasi','Pengenalan tokoh, latar, suasana.','Nadira tinggal di Kampung Kenanga, ayahnya melaut.'],['#1f6fd1','Pengungkapan peristiwa','Masalah mulai muncul.','Bu Laras menemukan pengumuman beasiswa.'],['#0b7f84','Menuju konflik','Masalah makin rumit.','Ayah menolak dan melarang Nadira mendaftar.'],['#c2306f','Puncak konflik','Ketegangan paling tinggi.','Ayah jatuh sakit saat badai; Nadira harus memilih.'],['#b85a00','Penyelesaian','Konflik mereda.','Ayah merestui keberangkatan Nadira.'],['#6a3fc9','Koda','Penutup dan kesan akhir.','Lima tahun kemudian Nadira pulang sebagai guru.']].map((a,i)=>`<li style="--c:${a[0]}"><div class="n">${i+1}</div><div class="tx"><b>${a[1]}</b><p>${a[2]}</p><p><i>Contoh:</i> ${a[3]}</p></div></li>`).join('')}</ol>`],
+["🧱 Unsur intrinsik: bahan dari dalam cerita",()=>`<div class="tip">💡 <b>Analogi:</b> unsur intrinsik seperti telur, tepung, dan gula yang menyatu di dalam adonan kue.</div><div class="cards">${[['#7c4dff','💡','Tema','Gagasan pokok cerita.','Perjuangan meraih pendidikan di tengah keterbatasan.'],['#c2306f','🧑‍🎤','Tokoh dan penokohan','Pelaku dan cara watak digambarkan. Analitik: dijelaskan langsung. Dramatik: lewat tindakan dan dialog.','\u201cNadira keras kepala\u201d (analitik). Ia diam-diam menyimpan pengumuman beasiswa (dramatik).'],['#b85a00','🔀','Alur','Rangkaian peristiwa: maju, mundur, atau campuran.','Maju, dengan sorot balik penolakan Ayah dua tahun lalu.'],['#0b7f84','📍','Latar','Tempat, waktu, dan suasana.','Kampung nelayan, 1994, suasana tegang.'],['#1f6fd1','👁️','Sudut pandang','Dari mana cerita dituturkan.','Orang ketiga serba tahu: \u201cNadira tidak tahu ayahnya menjual jala.\u201d'],['#2e8b57','🖋️','Gaya bahasa','Pilihan kata dan majas pengarang.','\u201cLaut menarik napas panjang\u201d (personifikasi).'],['#d4380d','💌','Amanat','Pesan untuk pembaca.','Jangan biarkan keterbatasan menghentikan cita-cita.']].map(a=>cd(...a)).join('')}</div>`],
+["🌍 Unsur ekstrinsik: pengaruh dari luar",()=>`<div class="tip">💡 <b>Analogi:</b> dapur dan juru masaknya tidak ada di dalam kue, tetapi menentukan rasanya.</div><div class="cards">${cd('#6a3fc9','✍️','Biografi pengarang','Pengalaman hidup penulis.','Pengarang tumbuh di kampung nelayan dan pernah putus sekolah.')}${cd('#b85a00','💰','Kondisi sosial-ekonomi','Keadaan masyarakat saat itu.','Banyak keluarga nelayan menilai kuliah sebagai beban biaya.')}${cd('#0b7f84','🏺','Budaya dan sejarah','Adat dan pandangan zaman.','Anak perempuan dianggap cukup menikah dan membantu keluarga.')}${cd('#2e8b57','🌱','Nilai dalam cerita','Pendidikan, moral, sosial, religius.','Semangat belajar, bakti pada orang tua, gotong royong, berserah setelah berusaha.')}</div>
+<div class="vs"><div style="background:color-mix(in srgb,#3b4cca 15%,var(--panel))"><b>Intrinsik = di dalam cerita</b><br>Bisa dibuktikan dari teks novel.</div><div style="background:color-mix(in srgb,#6a3fc9 15%,var(--panel))"><b>Ekstrinsik = di luar cerita</b><br>Menjelaskan penulis atau zaman.</div></div>
+<div class="tip">🔎 <b>Cara cepat membedakan:</b> tanyakan, \u201cApakah ini bisa kubuktikan hanya dengan membaca isi cerita?\u201d Jika ya, intrinsik. Jika tidak, ekstrinsik.</div>`]];
+R.Teori=()=>{$('#view').innerHTML=`<h2>Teori</h2><p class="mute">Buka tiap bagian. Semua contoh berasal dari ${NV}.</p>`+T.map((t,i)=>`<details ${i==0?'open':''}><summary>${t[0]}</summary><div>${t[1]()}</div></details>`).join('')+`<div class="row"><button class="btn alt" onclick="go('Pengantar')">Kembali</button><button class="btn" onclick="go('Bermain')">Lanjut bermain</button></div>`};
+
+const M=["Tema","Tokoh dan penokohan","Alur","Latar","Sudut pandang","Gaya bahasa","Amanat","Unsur ekstrinsik"];
+const Q=[
+["Kampung Kenanga di pesisir selatan, tahun 1994, dengan perahu berderet dan bau asin yang menempel di dinding rumah.",3,"Perhatikan tempat dan waktu yang disebutkan."],
+["Nadira tidak mau menurut begitu saja; ia keras kepala, tetapi diam-diam menyimpan pengumuman beasiswa di balik buku.",1,"Kalimat ini menggambarkan watak seseorang."],
+["Aku menunggu di balik pintu, jantungku berdegup, sementara Ayah berbicara dengan Bu Laras.",4,"Perhatikan siapa yang bercerita (kata ganti apa yang dipakai)."],
+["Dua tahun sebelumnya, Ayah pernah menolak tawaran serupa; kini ia menolak lagi.",2,"Cerita kembali ke peristiwa lampau dalam rangkaian kejadian."],
+["Novel ini berkisah tentang perjuangan seorang anak nelayan meraih pendidikan di tengah keterbatasan ekonomi.",0,"Ini gagasan pokok yang mendasari seluruh cerita."],
+["Jangan biarkan keterbatasan menghentikan langkahmu, dan dengarkanlah orang tua dengan hati yang lapang.",6,"Ini pesan yang ditujukan kepada pembaca."],
+["Pengarang tumbuh di kampung nelayan dan pernah putus sekolah, pengalaman itu memengaruhi cara ia menggambarkan Nadira.",7,"Informasi ini berasal dari luar isi cerita."],
+["Laut menarik napas panjang malam itu, seolah ikut menimbang keputusan Nadira.",5,"Laut digambarkan seperti manusia."]];
+let qi=0,first=0,tried=false;
+R.Bermain=()=>{qi=0;first=0;g1()};
+function g1(){const q=Q[qi];tried=false;
+$('#view').innerHTML=`<h2>Bermain: sortir unsur</h2><p class="mute">Kutipan ${qi+1} dari ${Q.length}. Tentukan unsur novel yang paling tepat. Jawaban salah memberi petunjuk.</p>
+<div class="quote">${esc(q[0])}</div><div class="opts cols">${M.map((m,i)=>`<button class="opt" data-i="${i}">${m}</button>`).join('')}</div>
+<div class="fb" id="fb" aria-live="polite"></div>
+<div class="row"><span>Tepat di percobaan pertama: <b id="sc">${first}</b></span><button class="btn" id="nx" disabled>${qi<Q.length-1?'Kutipan berikutnya':'Lihat hasil'}</button></div>`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;
+ if(i===q[1]){if(!tried)first++;b.classList.add('ok');document.querySelectorAll('.opt').forEach(x=>x.disabled=true);$('#nx').disabled=false;$('#sc').textContent=first;$('#fb').className='fb ok';$('#fb').innerHTML='<b>Tepat.</b> '+M[i]+'.'}
+ else{tried=true;b.classList.add('no');b.disabled=true;$('#fb').className='fb no';$('#fb').innerHTML='<b>Belum tepat.</b> Petunjuk: '+esc(q[2])}});
+$('#nx').onclick=()=>{qi++;if(qi<Q.length)g1();else{P.Bermain=first;const t=first>=7?'Pakar Unsur Novel':first>=5?'Analis Novel':'Pembaca Teliti';
+$('#view').innerHTML=`<h2>Hasil bermain</h2><div class="done"><p><b>${first} dari ${Q.length} tepat di percobaan pertama. Lencana: ${t}.</b></p></div><div class="row"><button class="btn alt" onclick="go('Bermain')">Main lagi</button><button class="btn" onclick="go('Berlatih')">Lanjut berlatih</button></div>`}}}
+
+const B=[
+["Manakah yang BUKAN ciri novel?",["Tokoh dan konflik lebih banyak","Fiksi berbentuk prosa","Latar dapat berpindah-pindah","Cerita selesai dalam satu adegan singkat"],3,"Novel panjang dan berlapis. Cerita yang selesai dalam satu adegan singkat lebih mirip cerpen."],
+["Tahap yang memperkenalkan tokoh, latar, dan suasana awal disebut...",["koda","penyelesaian","orientasi","puncak konflik"],2,"Orientasi adalah tahap pembuka tempat pembaca mengenal tokoh dan latar."],
+["Ayah jatuh sakit saat badai dan Nadira harus memilih. Tahap struktur ini adalah...",["pengungkapan peristiwa","puncak konflik","penyelesaian","koda"],1,"Ketegangan paling tinggi terjadi saat tokoh menghadapi pilihan sulit, itulah puncak konflik."],
+["\u201cLima tahun kemudian Nadira pulang menjadi guru.\u201d Tahap struktur ini adalah...",["orientasi","menuju konflik","koda","puncak konflik"],2,"Koda adalah penutup yang memberi kesan akhir setelah konflik selesai."],
+["\u201cPerjuangan meraih pendidikan di tengah keterbatasan\u201d adalah contoh...",["amanat","tema","latar","sudut pandang"],1,"Tema adalah gagasan pokok cerita. Amanat adalah pesan yang ditujukan kepada pembaca."],
+["Nadira membanting pintu dan berkata, \u201cAku tetap akan pergi!\u201d Watak digambarkan lewat teknik...",["analitik","dramatik","deskripsi latar","sorot balik"],1,"Watak terlihat dari tindakan dan dialog, bukan dijelaskan langsung. Itu teknik dramatik."],
+["\u201cAyah adalah lelaki pendiam yang sangat menyayangi anaknya.\u201d Teknik penokohannya adalah...",["analitik","dramatik","alur mundur","gaya bahasa"],0,"Penulis menjelaskan watak secara langsung, itulah teknik analitik."],
+["Cerita berurutan dari Nadira kecil, remaja, lalu dewasa tanpa kembali ke masa lalu. Alurnya adalah...",["alur maju","alur mundur","alur campuran","tanpa alur"],0,"Peristiwa disusun urut dari awal ke akhir, sehingga disebut alur maju."],
+["\u201cRumah itu terasa sepi dan mencekam.\u201d Kalimat tersebut menggambarkan latar...",["tempat","waktu","suasana","sosial"],2,"Kata <i>sepi</i> dan <i>mencekam</i> menggambarkan rasa atau keadaan batin, yaitu latar suasana."],
+["\u201cNadira tidak tahu ayahnya telah menjual jala,\u201d tutur narator yang mengetahui isi hati banyak tokoh. Sudut pandangnya adalah...",["orang pertama pelaku utama","orang pertama pelaku sampingan","orang ketiga serba tahu","orang ketiga terbatas"],2,"Narator mengetahui hal yang tidak diketahui tokoh, ciri orang ketiga serba tahu."],
+["Manakah yang merupakan unsur ekstrinsik?",["Nadira tinggal di kampung nelayan","Pengarang pernah hidup di kampung nelayan sehingga detail laut terasa nyata","Ayah menolak permintaan Nadira","Laut menarik napas panjang"],1,"Pengalaman hidup pengarang berasal dari luar cerita, jadi termasuk unsur ekstrinsik (biografi pengarang)."],
+["Nadira menunda cita-citanya demi merawat ayahnya. Nilai yang paling menonjol adalah...",["nilai moral (bakti pada orang tua)","nilai estetika","nilai ekonomi","nilai politik"],0,"Tindakan mengutamakan orang tua mencerminkan nilai moral berupa bakti."],
+["\u201cLaut menarik napas panjang malam itu.\u201d Majas yang dipakai adalah...",["simile","personifikasi","hiperbola","ironi"],1,"Laut diberi perilaku manusia (menarik napas), itulah personifikasi."],
+["Mengapa unsur ekstrinsik penting saat menganalisis novel?",["Membantu memahami latar belakang dan alasan pengarang menulis cerita","Menggantikan unsur intrinsik","Menentukan panjang novel","Mengubah alur cerita"],0,"Unsur ekstrinsik melengkapi analisis dengan konteks penulis, masyarakat, dan zaman."]];
+const RO=["🎉 Mantap!","🔥 Keren, pas sekali!","👏 Detektif novel sejati!","✨ Tepat sasaran!"],RX=["🤔 Hampir! Cermati kata kuncinya.","💪 Belum tepat, tidak apa-apa. Baca penjelasannya.","🧐 Coba perhatikan petunjuk dalam soal."];
+let bi=0,bs=0,pt=0,st=0,ans=[];
+R.Berlatih=()=>{bi=0;bs=0;pt=0;st=0;ans=[];b1()};
+function b1(){const q=B[bi];
+$('#view').innerHTML=`<h2>Berlatih</h2><div class="row" style="margin:0 0 8px"><span class="mute">Soal ${bi+1} dari ${B.length}</span><span class="pts">\u2B50 <span id="pt">${pt}</span> poin${st>=2?` \u00b7 \uD83D\uDD25 ${st} beruntun`:''}</span></div><div class="bar"><i style="width:${bi/B.length*100}%"></i></div>
+<p style="margin-top:12px"><b>${q[0]}</b></p><div class="opts">${q[1].map((o,i)=>`<button class="opt" data-i="${i}">${o}</button>`).join('')}</div><div id="fb" aria-live="polite"></div>
+<div class="row"><span class="mute">Benar +10 poin, 3 benar beruntun +5 bonus</span><button class="btn" id="nx" disabled>${bi<B.length-1?'Soal berikutnya':'Lihat hasil dan pembahasan'}</button></div>`;
+document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const i=+b.dataset.i,ok=i===q[2];let g=0;
+ if(ok){bs++;st++;g=10+(st>=3?5:0);pt+=g}else st=0;ans.push(i);
+ document.querySelectorAll('.opt').forEach((x,j)=>{x.disabled=true;if(j===q[2])x.classList.add('ok')});if(!ok)b.classList.add('no');
+ $('#pt').textContent=pt;
+ $('#fb').innerHTML=`<div class="react ${ok?'ok':'no'}"><div class="em">${ok?'\uD83C\uDF89':'\uD83E\uDD14'}</div><div><b>${ok?RO[bi%RO.length]:RX[bi%RX.length]}</b> ${ok?`<span class="gain">+${g} poin${st>=3?' (bonus beruntun)':''}</span>`:''}<p>${q[3]}</p></div></div>`;
+ $('#nx').disabled=false});
+$('#nx').onclick=()=>{bi++;bi<B.length?b1():bres()}}
+function bres(){P.Berlatih=bs;const r=bs/B.length,t=r>=.85?'Master Novel \uD83C\uDFC6':r>=.6?'Analis Novel \uD83E\uDD48':'Pembaca Teliti \uD83E\uDD49';
+$('#view').innerHTML=`<h2>Hasil berlatih</h2><div class="done"><div class="score">\u2B50 ${pt} poin</div><p style="margin-top:8px"><b>${bs} dari ${B.length} soal benar. Predikat: ${t}</b></p><p>${r>=.6?'Pemahamanmu sudah baik. Periksa pembahasan untuk soal yang masih keliru.':'Baca pembahasan di bawah dan buka lagi menu Teori, lalu coba ulangi.'}</p></div>
+<h3>Pembahasan soal</h3>${B.map((q,k)=>{const ok=ans[k]===q[2];return `<div class="rv ${ok?'ok':'no'}"><b>${ok?'\u2705':'\u274C'} Soal ${k+1}.</b> ${q[0]}<p>Jawabanmu: ${q[1][ans[k]]}</p>${ok?'':`<p>Jawaban benar: <b>${q[1][q[2]]}</b></p>`}<p><i>Pembahasan:</i> ${q[3]}</p></div>`}).join('')}
+<div class="row"><button class="btn alt" onclick="go('Berlatih')">Ulangi latihan</button><button class="btn" onclick="go('Simulasi')">Lanjut simulasi</button></div>`;window.scrollTo(0,0)}
+
+const PV=[
+{n:"Orang pertama (aku)",t:"Aku menunggu di balik pintu. Jantungku berdegup kencang. Suara Ayah terdengar berat, dan aku takut mendengar jawabannya.",m:[95,25,20],c:"Pembaca merasakan ketakutan Nadira secara langsung, tetapi hanya tahu apa yang diketahuinya."},
+{n:"Orang ketiga terbatas",t:"Nadira menunggu di balik pintu. Jantungnya berdegup kencang. Suara Ayah terdengar berat, dan ia takut mendengar jawabannya.",m:[70,45,50],c:"Pembaca tetap dekat dengan Nadira, tetapi narator berjarak sehingga terasa lebih rapi."},
+{n:"Orang ketiga serba tahu",t:"Nadira menunggu di balik pintu dengan jantung berdegup. Di dalam, Ayah sebenarnya sudah lama ingin mengizinkan, tetapi malu mengakui bahwa ia telah menjual jala untuk ongkos Nadira.",m:[45,95,85],c:"Pembaca tahu isi hati banyak tokoh, termasuk rahasia yang tidak diketahui Nadira."}];
+const AR=[["Orientasi",15,"Nadira, anak nelayan Kampung Kenanga, hidup sederhana bersama ayah dan ibunya."],["Pengungkapan peristiwa",30,"Bu Laras menemukan pengumuman beasiswa dan menyerahkannya kepada Nadira."],["Menuju konflik",55,"Ayah menolak dan melarang Nadira mendaftar. Nadira mulai membangkang."],["Puncak konflik",100,"Badai datang dan Ayah jatuh sakit di laut. Nadira harus memilih antara keluarga dan cita-citanya."],["Penyelesaian",45,"Ayah sembuh, menyadari kesungguhan Nadira, dan merestuinya."],["Koda",20,"Lima tahun kemudian Nadira pulang sebagai guru dan mengajar anak-anak nelayan."]];
+R.Simulasi=()=>{$('#view').innerHTML=`<h2>Simulasi</h2>
+<h3>A. Tuas sudut pandang</h3><p class="mute">Adegan yang sama diceritakan dari tiga sudut pandang. Geser dan amati bedanya.</p>
+<div id="pn" style="font-weight:700"></div><div class="quote" id="pt" style="min-height:8em" aria-live="polite"></div>
+<input type="range" id="lv" min="0" max="2" value="0" aria-label="Sudut pandang"><div class="ends"><span>Dekat dengan tokoh</span><span>Mengetahui segalanya</span></div>
+<div class="meters">${["Kedekatan emosi","Informasi yang diketahui pembaca","Jarak narator dari tokoh"].map((n,i)=>`<div class="m"><span>${n}</span><div class="bar"><i id="b${i}"></i></div></div>`).join('')}</div><p id="pc"></p>
+<h3>B. Grafik alur ${NV}</h3><p class="mute">Pilih tiap tahap untuk melihat peristiwanya. Tinggi batang menunjukkan ketegangan cerita.</p>
+<div class="arc" role="group" aria-label="Tahap alur">${AR.map((a,i)=>`<button data-i="${i}" aria-pressed="false" style="height:${a[1]}%">${a[0]}</button>`).join('')}</div>
+<p class="quote" id="ai" aria-live="polite" style="margin-top:0">Pilih sebuah batang.</p>
+<div class="row"><button class="btn alt" onclick="go('Berlatih')">Kembali</button><button class="btn" onclick="go('Refleksi')">Lanjut refleksi</button></div>`;
+const sh=()=>{const d=PV[+$('#lv').value];$('#pn').textContent=d.n;$('#pt').textContent=d.t;d.m.forEach((x,i)=>$('#b'+i).style.width=x+'%');$('#pc').textContent=d.c};$('#lv').oninput=sh;sh();
+document.querySelectorAll('.arc button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.arc button').forEach(x=>x.setAttribute('aria-pressed',x===b));const a=AR[+b.dataset.i];$('#ai').innerHTML=`<b>${a[0]}.</b> ${a[2]}`})};
+
+const K=["Saya dapat menjelaskan pengertian dan ciri novel.","Saya dapat menyebutkan tahapan struktur novel.","Saya dapat menemukan unsur intrinsik dalam kutipan novel.","Saya dapat membedakan unsur intrinsik dan ekstrinsik."];
+const Rp=["Unsur novel mana yang paling mudah kamu kenali, dan mana yang paling sulit? Mengapa?","Pilih novel yang pernah kamu baca. Tuliskan tema, tokoh utama, dan amanatnya.","Informasi ekstrinsik apa yang ingin kamu cari tentang novel itu agar kamu lebih memahami isinya?"];
+R.Refleksi=()=>{const f=(x,y)=>y===null?'belum dicoba':`${y} dari ${x}`;
+$('#view').innerHTML=`<h2>Refleksi</h2><div class="done" style="margin-top:0"><b>Rekap belajarmu</b><p style="margin:6px 0 0">Bermain: ${f(Q.length,P.Bermain)}. Berlatih: ${f(B.length,P.Berlatih)} soal benar.</p></div>
+<h3>Penilaian diri</h3>${K.map(k=>`<label class="ck"><input type="checkbox" class="c"><span>${k}</span></label>`).join('')}
+<h3>Pertanyaan refleksi</h3>${Rp.map((r,i)=>`<p>${i+1}. ${r}</p><textarea class="ta" aria-label="Jawaban ${i+1}"></textarea>`).join('')}
+<div class="row"><button class="btn alt" onclick="go('Pengantar')">Ke awal</button><button class="btn" id="sm">Buat ringkasan</button></div><div id="out"></div>`;
+$('#sm').onclick=()=>{const c=[...document.querySelectorAll('.c')].filter(x=>x.checked).length;const a=[...document.querySelectorAll('.ta')].map((x,i)=>`${i+1}. ${Rp[i]}\n${x.value||'(belum diisi)'}`).join('\n\n');
+const txt=`Refleksi MPI Novel\nBermain: ${f(Q.length,P.Bermain)}; Berlatih: ${f(B.length,P.Berlatih)}\nPenilaian diri: ${c} dari ${K.length} pernyataan\n\n${a}`;
+$('#out').innerHTML=`<h3>Ringkasan refleksi</h3><textarea id="rt" readonly style="min-height:200px">${esc(txt)}</textarea><p class="mute">Salin teks ini, lalu kirim ke gurumu.</p>`;$('#rt').select()}};
+go('Pengantar');
+</script>
+</body>
+</html>
